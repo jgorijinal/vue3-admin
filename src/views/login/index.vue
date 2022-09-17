@@ -78,13 +78,14 @@ const handleLogin = () => {
     loading.value = true // 开启 loading 动画
     store
       .dispatch('user/loginAction', loginForm.value)
-      .then((res) => {
-        console.log(res)
+      .then(() => {
+        // 登录后操作
+        loading.value = false
       })
       .catch((err) => {
         console.log(err)
+        loading.value = false
       })
-    loading.value = false
   })
 }
 </script>

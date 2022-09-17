@@ -2,7 +2,8 @@ import { login } from '@/api/sys'
 import md5 from 'md5'
 import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
-
+import router from '@/router'
+import { ElMessage } from 'element-plus'
 export default {
   namespaced: true,
   state() {
@@ -25,8 +26,11 @@ export default {
           password: md5(password)
         })
           .then((res) => {
-            context.commit('setToken', res.data.data.token)
-            resolve(res)
+            context.commit('setToken', res.token)
+            ElMessage.success('登录成功')
+            // 登录后操作: 跳转
+            router.push('/')
+            resolve()
           })
           .catch((err) => {
             reject(err)
