@@ -1,14 +1,23 @@
 import { login } from '@/api/sys'
 import md5 from 'md5'
+import storage from '@/utils/storage'
+import { TOKEN } from '@/constant'
+
 export default {
   namespaced: true,
   state() {
-    return {}
+    return {
+      token: storage.getItem(TOKEN) || ''
+    }
   },
-  mutations: {},
+  mutations: {
+    setToken(state, token) {
+      state.token = token
+      storage.setItem(TOKEN, token)
+    }
+  },
   actions: {
     loginAction(context, userInfo) {
-      console.log(process.env.VUE_APP_BASE_API)
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
         login({
@@ -16,6 +25,7 @@ export default {
           password: md5(password)
         })
           .then((res) => {
+            context.commit('setToken', res.data.data.token)
             resolve(res)
           })
           .catch((err) => {
