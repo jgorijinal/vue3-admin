@@ -1,7 +1,12 @@
 <template>
   <div class="login-container">
     <!--表单-->
-    <el-form class="login-form" ref="loginFormRef" :model="loginForm" :rules="loginRules">
+    <el-form
+      class="login-form"
+      ref="loginFormRef"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h1 class="title">后台管理系统</h1>
       </div>
@@ -23,13 +28,21 @@
           v-model="loginForm.password"
         ></el-input>
       </el-form-item>
-      <el-button style="width: 100%" type="primary">登录</el-button>
+      <el-button
+        style="width: 100%"
+        type="primary"
+        :loading="loading"
+        @click="handleLogin"
+        >登录</el-button
+      >
     </el-form>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
 import { validatePassword } from './rules'
+import { useStore } from 'vuex'
+
 const loginForm = ref({
   username: 'super-admin',
   password: '123456'
@@ -53,6 +66,26 @@ const loginRules = {
       validator: validatePassword
     }
   ]
+}
+
+// 处理登录
+const loading = ref(false)
+const store = useStore()
+const loginFormRef = ref(null)
+const handleLogin = () => {
+  loginFormRef.value.validate((isOK) => {
+    if (!isOK) return
+    loading.value = true // 开启 loading 动画
+    store
+      .dispatch('user/loginAction', loginForm.value)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    loading.value = false
+  })
 }
 </script>
 <style lang="scss" scoped>
