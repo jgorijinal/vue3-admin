@@ -4,6 +4,7 @@ import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
+import { setTimeStamp } from '@/utils/auth'
 export default {
   namespaced: true,
   state() {
@@ -34,6 +35,8 @@ export default {
             ElMessage.success('登录成功')
             // 登录后操作: 跳转
             router.push('/')
+            // 设置登录时时间戳
+            setTimeStamp()
             resolve()
           })
           .catch((err) => {
@@ -46,6 +49,13 @@ export default {
       console.log(res)
       context.commit('setUserInfo', res)
       return res
+    },
+    logoutAction(context) {
+      context.commit('setToken', '')
+      context.commit('setUserInfo', {})
+      storage.clear()
+      // TODO : 清理掉权限相关配置
+      router.push('/login')
     }
   }
 }

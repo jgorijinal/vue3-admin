@@ -16,14 +16,20 @@
             <router-link to="/">
               <el-dropdown-item> 首页 </el-dropdown-item>
             </router-link>
-            <el-dropdown-item divided> 退出登录 </el-dropdown-item>
+            <el-dropdown-item divided @click="logout"> 退出登录 </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useStore } from 'vuex'
+const store = useStore()
+const logout = () => {
+  store.dispatch('user/logoutAction')
+}
+</script>
 <style lang="scss" scoped>
 .navbar {
   height: 50px;
