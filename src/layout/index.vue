@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <!--左侧 menu-->
-    <sidebar id="guide-sidebar" class="sidebar-container"></sidebar>
+    <sidebar id="guide-sidebar" class="sidebar-container" :style="{backgroundColor:variables.menuBg}"></sidebar>
     <div class="main-container">
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
@@ -13,13 +13,16 @@
   </div>
 </template>
 <script setup>
+import variables from '@/styles/variables.module.scss'
 import Sidebar from './components/Sidebar/index.vue'
 import Navbar from './components/Navbar.vue'
 import AppMain from './components/AppMain.vue'
+
+console.log(variables)
 </script>
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
-@import '~@/styles/variables.scss';
+@import '~@/styles/variables.module.scss';
 
 .app-wrapper {
   @include clearfix;
