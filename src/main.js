@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import './permission'
 // 初始化样式
-import '@/style/index.scss'
+import '@/styles/index.scss'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
