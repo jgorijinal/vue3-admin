@@ -1,4 +1,4 @@
-import { login } from '@/api/sys'
+import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -8,13 +8,17 @@ export default {
   namespaced: true,
   state() {
     return {
-      token: storage.getItem(TOKEN) || ''
+      token: storage.getItem(TOKEN) || '',
+      userInfo: {}
     }
   },
   mutations: {
     setToken(state, token) {
       state.token = token
       storage.setItem(TOKEN, token)
+    },
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo
     }
   },
   actions: {
@@ -36,6 +40,12 @@ export default {
             reject(err)
           })
       })
+    },
+    async getUserInfoAction(context) {
+      const res = await getUserInfo()
+      console.log(res)
+      context.commit('setUserInfo', res)
+      return res
     }
   }
 }

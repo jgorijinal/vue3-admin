@@ -15,6 +15,9 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next('/')
     } else {
+      if (!store.getters.hasUserInfo) { // 如果没有用户资料
+        store.dispatch('user/getUserInfoAction')
+      }
       next()
     }
   } else {

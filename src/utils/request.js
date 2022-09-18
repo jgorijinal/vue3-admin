@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 const service = axios.create({
@@ -11,6 +12,9 @@ service.interceptors.request.use(
     // 添加 icode
     config.headers.icode = 'DD22DA343836C52E'
     // 必须返回 config
+    if (store.getters.token) {
+      config.headers.Authorization = 'Bearer ' + store.getters.token
+    }
     return config
   },
   (err) => {

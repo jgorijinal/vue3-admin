@@ -18,7 +18,6 @@ import Sidebar from './components/Sidebar/index.vue'
 import Navbar from './components/Navbar.vue'
 import AppMain from './components/AppMain.vue'
 
-console.log(variables)
 </script>
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
