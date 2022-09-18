@@ -46,7 +46,6 @@ export default {
     },
     async getUserInfoAction(context) {
       const res = await getUserInfo()
-      console.log(res)
       context.commit('setUserInfo', res)
       return res
     },

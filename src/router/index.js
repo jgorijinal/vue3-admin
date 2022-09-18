@@ -7,6 +7,10 @@ const privateRoutes = [
     path: '/user',
     component: Layout,
     redirect: '/user/manage',
+    meta: {
+      title: 'user',
+      icon: 'user'
+    },
     children: [
       {
         path: '/user/manege',
@@ -27,7 +31,7 @@ const privateRoutes = [
         }
       },
       {
-        path: 'user/permission',
+        path: '/user/permission',
         name: 'userPermission',
         component: () => import('@/views/permission-list/index.vue'),
         meta: {
@@ -55,6 +59,10 @@ const privateRoutes = [
   {
     path: '/article',
     component: Layout,
+    meta: {
+      title: 'article',
+      icon: 'document'
+    },
     children: [
       {
         path: '/article/ranking',
@@ -105,7 +113,7 @@ const publicRoutes = [
     component: Layout,
     children: [
       {
-        path: 'profile',
+        path: '/profile',
         name: 'profile',
         component: () => import('@/views/profile/index.vue'),
         meta: {

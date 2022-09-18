@@ -14,7 +14,8 @@ service.interceptors.request.use(
     config.headers.icode = 'DD22DA343836C52E'
     // 必须返回 config
     if (store.getters.token) {
-      if (isCheckTImeout()) { // 前端主动介入( token 失效)
+      if (isCheckTImeout()) {
+        // 前端主动介入( token 失效)
         // 登出操作
         store.dispatch('user/logoutAction')
         return Promise.reject(new Error('token 失效'))
@@ -42,8 +43,11 @@ service.interceptors.response.use(
     }
   },
   (err) => {
-    // TODO: 将来处理 token 超时问题
-
+    // 处理 token 超时问题
+    if (err.response && err.response.data && err.response.data.code === 401) {
+      // token 超时 ->  登出
+      store.dispatch('user/logoutAction')
+    }
     ElMessage.error(err.message) // 提示消息
     return Promise.reject(err)
   }
