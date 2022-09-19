@@ -32,7 +32,7 @@
 import { useStore } from 'vuex'
 import HamBurger from '@/layout/components/Hamburger/index.vue'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
-import LangSelect from '@/components/LangSelect.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logoutAction')
