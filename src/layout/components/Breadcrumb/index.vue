@@ -1,17 +1,33 @@
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <!-- 面包屑的最后一项 -->
-    <el-breadcrumb-item>
-      <span class="no-redirect">活动详情</span>
-    </el-breadcrumb-item>
+    <transition-group name="breadcrumb">
+      <el-breadcrumb-item v-for="item in breadcrumbData" :key="item.path">{{
+      item.meta.title
+    }}</el-breadcrumb-item>
+    </transition-group>
   </el-breadcrumb>
 </template>
 
 <script setup>
-import {} from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const breadcrumbData = ref([])
+const route = useRoute()
+const getBreadcrumbData = () => {
+  breadcrumbData.value = route.matched.filter(
+    (route) => route.meta.icon && route.meta.title
+  )
+}
+watch(
+  route,
+  () => {
+    getBreadcrumbData()
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>
