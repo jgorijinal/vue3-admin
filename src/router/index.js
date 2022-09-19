@@ -35,7 +35,7 @@ const privateRoutes = [
         name: 'userPermission',
         component: () => import('@/views/permission-list/index.vue'),
         meta: {
-          title: 'userPermission',
+          title: 'permissionList',
           icon: 'finished'
         }
       },
@@ -69,7 +69,7 @@ const privateRoutes = [
         name: 'articleRanking',
         component: () => import('@/views/article-ranking/index.vue'),
         meta: {
-          title: 'article-ranking',
+          title: 'articleRanking',
           icon: 'rank'
         }
       },

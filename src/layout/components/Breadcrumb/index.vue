@@ -2,7 +2,7 @@
   <el-breadcrumb class="breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="item in breadcrumbData" :key="item.path">{{
-      item.meta.title
+      generateTitle(item.meta.title)
     }}</el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -11,7 +11,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { generateTitle } from '@/utils/i18n'
 const breadcrumbData = ref([])
 const route = useRoute()
 const getBreadcrumbData = () => {

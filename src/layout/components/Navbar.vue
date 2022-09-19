@@ -5,7 +5,10 @@
     <!--面包屑-->
     <breadcrumb class="breadcrumb"></breadcrumb>
     <div class="right-menu">
-      <lang-select effect="dark"></lang-select>
+      <!--全屏切换-->
+      <screenfull class="screenfull"/>
+      <!--语言切换-->
+      <lang-select effect="dark" class="lang-select"></lang-select>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -19,9 +22,9 @@
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
-              <el-dropdown-item> 首页 </el-dropdown-item>
+              <el-dropdown-item> {{$t('msg.navBar.home')}} </el-dropdown-item>
             </router-link>
-            <el-dropdown-item divided @click="logout"> 退出登录 </el-dropdown-item>
+            <el-dropdown-item divided @click="logout">{{$t('msg.navBar.logout')}} </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -33,6 +36,7 @@ import { useStore } from 'vuex'
 import HamBurger from '@/layout/components/Hamburger/index.vue'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logoutAction')
@@ -67,4 +71,12 @@ const logout = () => {
     }
   }
 }
+.lang-select, .screenfull {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
 </style>

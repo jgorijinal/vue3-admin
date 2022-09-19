@@ -41,7 +41,7 @@ const i18n = useI18n()
 const handleClickItem = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLang', lang)
-  ElMessage.success('语言切换成功')
+  ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
 }
 
 const currentLang = computed(() => { // 当前语言
@@ -50,11 +50,4 @@ const currentLang = computed(() => { // 当前语言
 </script>
 
 <style lang="scss" scoped>
-.langSelect {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-}
 </style>

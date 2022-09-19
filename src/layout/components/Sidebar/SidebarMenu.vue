@@ -14,7 +14,7 @@
         <el-icon>
           <component :is="item.meta.icon" />
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <span>{{ generateTitle(item.meta.title) }}</span>
       </el-menu-item>
     </template>
     <!--有子菜单的路由-->
@@ -24,7 +24,7 @@
           <el-icon>
             <component :is="item.meta.icon" />
           </el-icon>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ generateTitle(item.meta.title) }}</span>
         </template>
         <el-menu-item
           v-for="child in item.children"
@@ -34,7 +34,7 @@
           <el-icon>
             <component :is="child.meta.icon" />
           </el-icon>
-          <span>{{ child.meta.title }}</span>
+          <span>{{ generateTitle(child.meta.title) }}</span>
         </el-menu-item>
       </el-sub-menu>
     </template>
@@ -44,7 +44,7 @@
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
 import { filterRouters, generateMenus } from '@/utils/route'
-
+import { generateTitle } from '@/utils/i18n'
 const router = useRouter()
 const routes = computed(() => {
   const fRoutes = filterRouters(router.getRoutes())
