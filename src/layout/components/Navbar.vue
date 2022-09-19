@@ -1,5 +1,7 @@
 <template>
   <div class="navbar">
+    <!--头像-->
+    <hamBurger></hamBurger>
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -25,6 +27,7 @@
 </template>
 <script setup>
 import { useStore } from 'vuex'
+import HamBurger from '@/layout/components/Hamburger/index.vue'
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logoutAction')
