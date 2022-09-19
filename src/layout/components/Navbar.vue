@@ -2,6 +2,8 @@
   <div class="navbar">
     <!--头像-->
     <hamBurger></hamBurger>
+    <!--面包屑-->
+    <breadcrumb class="breadcrumb"></breadcrumb>
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -28,6 +30,8 @@
 <script setup>
 import { useStore } from 'vuex'
 import HamBurger from '@/layout/components/Hamburger/index.vue'
+import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
+
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logoutAction')
@@ -40,7 +44,9 @@ const logout = () => {
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
+  .breadcrumb{
+    float:left
+  }
   .right-menu {
     display: flex;
     align-items: center;

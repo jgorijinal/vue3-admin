@@ -70,7 +70,7 @@ const privateRoutes = [
         component: () => import('@/views/article-ranking/index.vue'),
         meta: {
           title: 'article-ranking',
-          icon: 'document'
+          icon: 'rank'
         }
       },
       {
@@ -118,7 +118,7 @@ const publicRoutes = [
         component: () => import('@/views/profile/index.vue'),
         meta: {
           title: 'profile',
-          icon: 'user'
+          icon: 'place'
         }
       }
     ]

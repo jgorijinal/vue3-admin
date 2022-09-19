@@ -1,9 +1,9 @@
 <template>
   <div class="hamburger-container">
     <el-icon v-if="$store.getters.sidebarOpened" @click="toggleClick"
-      ><Menu
+      ><Fold
     /></el-icon>
-    <el-icon v-else @click="toggleClick"><MoreFilled /></el-icon>
+    <el-icon v-else @click="toggleClick"><Expand /></el-icon>
   </div>
 </template>
 <script setup>
@@ -20,6 +20,7 @@ const toggleClick = () => {
   width:46px;
   height: 46px;
   cursor: pointer;
+  float: left;
 }
 .el-icon {
   padding:17px;
