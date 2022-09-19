@@ -1,35 +1,46 @@
 <template>
   <el-menu
     :uniqueOpened="true"
-    default-active="2"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
+    :default-active="activeMenu"
+    :background-color="$store.getters.cssVar.menuBg"
+    :text-color="$store.getters.cssVar.menuText"
+    :active-text-color="$store.getters.cssVar.menuActiveText"
+    router
   >
-    <el-menu-item index="1">
-      <el-icon><setting /></el-icon>
-      <span>导航 1</span>
-    </el-menu-item>
-    <el-menu-item index="2">
-      <el-icon><document /></el-icon>
-      <span>导航 2</span>
-    </el-menu-item>
-    <el-menu-item index="3">
-      <el-icon><setting /></el-icon>
-      <span>导航 3</span>
-    </el-menu-item>
-    <el-sub-menu index="4">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>导航4</span>
-      </template>
-      <el-menu-item index="4-1">导航 4 - 1</el-menu-item>
-      <el-menu-item index="4-2">导航 4 - 2</el-menu-item>
-    </el-sub-menu>
+    <!--没有子菜单的路由-->
+    <template v-for="item in noChildrenRoutes" :key="item.path">
+      <el-menu-item :index="item.path">
+        <el-icon>
+          <component :is="item.meta.icon" />
+        </el-icon>
+        <span>{{ item.meta.title }}</span>
+      </el-menu-item>
+    </template>
+    <!--有子菜单的路由-->
+    <template v-for="item in hasChildrenRoutes" :key="item.path">
+      <el-sub-menu :index="item.path">
+        <template #title>
+          <el-icon>
+            <component :is="item.meta.icon" />
+          </el-icon>
+          <span>{{ item.meta.title }}</span>
+        </template>
+        <el-menu-item
+          v-for="child in item.children"
+          :key="child.path"
+          :index="child.path"
+        >
+          <el-icon>
+            <component :is="child.meta.icon" />
+          </el-icon>
+          <span>{{ child.meta.title }}</span>
+        </el-menu-item>
+      </el-sub-menu>
+    </template>
   </el-menu>
 </template>
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
 import { filterRouters, generateMenus } from '@/utils/route'
 
@@ -38,8 +49,20 @@ const routes = computed(() => {
   const fRoutes = filterRouters(router.getRoutes())
   return generateMenus(fRoutes)
 })
-console.log(routes.value)
-console.log(router.getRoutes())
-// console.log(JSON.stringify(routes.value))
+
+// 没有子菜单的路由
+const noChildrenRoutes = computed(() => {
+  return routes.value.filter((route) => JSON.stringify(route.children) === '[]')
+})
+// 有子菜单的路由
+const hasChildrenRoutes = computed(() => {
+  return routes.value.filter((route) => JSON.stringify(route.children) !== '[]')
+})
+
+// 当前路由激活项
+const route = useRoute()
+const activeMenu = computed(() => {
+  return route.path
+})
 </script>
 <style></style>
