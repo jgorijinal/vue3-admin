@@ -4,3 +4,5 @@ export const TOKEN = 'token'
 export const TIME_STAMP = 'timeStamp'
 // token 的有效时长(毫秒): 两个小时
 export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 1000
+
+export const LANG = 'lang' // 语言

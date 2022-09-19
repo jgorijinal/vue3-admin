@@ -1,9 +1,9 @@
 <template>
   <div class="hamburger-container">
-    <el-icon v-if="$store.getters.sidebarOpened" @click="toggleClick"
+    <el-icon :size="28" v-if="$store.getters.sidebarOpened" @click="toggleClick"
       ><Fold
     /></el-icon>
-    <el-icon v-else @click="toggleClick"><Expand /></el-icon>
+    <el-icon v-else :size="28" @click="toggleClick"><Expand /></el-icon>
   </div>
 </template>
 <script setup>
@@ -16,9 +16,11 @@ const toggleClick = () => {
 </script>
 <style lang="scss" scoped>
 .hamburger-container {
-  display: inline-block;
+  display: flex;
   width:46px;
-  height: 46px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
   cursor: pointer;
   float: left;
 }
