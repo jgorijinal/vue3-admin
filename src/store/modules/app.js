@@ -8,7 +8,6 @@ export default {
   mutations: {
     toggleSidebarOpened(state) {
       state.sidebarOpened = !state.sidebarOpened
-      console.log(state.sidebarOpened)
     }
   }
 }
