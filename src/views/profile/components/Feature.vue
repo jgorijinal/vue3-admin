@@ -16,14 +16,12 @@
 </template>
 <script setup>
 import { defineProps } from 'vue'
-
-const props = defineProps({
+defineProps({
   features: {
     type: Array,
     required: true
   }
 })
-console.log(props.features)
 </script>
 <style lang="scss" scoped>
 ::v-deep .content {
