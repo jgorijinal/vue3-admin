@@ -2,7 +2,7 @@
   <div class="user-container">
     <el-row>
       <el-col :span="8">
-        <project-card class="project-card" :features="featureData"/>
+        <project-card class="project-card" :features="featureData" />
       </el-col>
       <el-col :span="16">
         <el-card>
@@ -26,13 +26,21 @@ import Author from './components/Author.vue'
 import ProjectCard from './components/ProjectCard.vue'
 import Feature from './components/Feature.vue'
 import { feature } from '@/api/user'
+import { watchSwitchLang } from '@/utils/i18n'
 const activeName = ref('feature')
 
 const featureData = ref([])
 const getFeatures = async () => {
-  featureData.value = await feature()
+  const res = await feature()
+  res.splice(10, 1)
+  res.splice(10, 1)
+  res.splice(9, 1)
+  res.splice(9, 1)
+  featureData.value = res
 }
 getFeatures()
+
+watchSwitchLang(getFeatures)
 </script>
 
 <style lang="scss" scoped>
