@@ -110,6 +110,7 @@ const publicRoutes = [
   {
     path: '/',
     name: 'layout',
+    redirect: '/profile',
     component: Layout,
     children: [
       {

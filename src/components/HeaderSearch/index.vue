@@ -1,7 +1,9 @@
 <template>
-  <div class="header-search"  :class="{ show: isShow }">
+  <div class="header-search" :class="{ show: isShow }">
     <el-tooltip content="搜索" trigger="hover">
-      <el-icon :size="28" class="search-icon" @click.stop="onShowClick"><Search /></el-icon>
+      <el-icon :size="28" class="search-icon" @click.stop="onShowClick"
+        ><Search
+      /></el-icon>
     </el-tooltip>
     <el-select
       v-model="search"
@@ -15,17 +17,46 @@
       @change="onSelectChange"
     >
       <el-option
-        v-for="item in 4"
-        :key="item"
-        :label="item"
-        :value="item"
+        v-for="option in searchOptions"
+        :key="option.item.path"
+        :label="option.item.title.join(' - ')"
+        :value="option.item.path"
       />
     </el-select>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
+import Fuse from 'fuse.js'
+import router from '@/router'
+import { filterRouters } from '@/utils/route'
+import { generateRoutes } from './FuseData'
+const searchPool = computed(() => {
+  const fRoutes = filterRouters(router.getRoutes())
+  return generateRoutes(fRoutes)
+})
+console.log(searchPool.value)
+const fuse = new Fuse(searchPool.value, {
+  // 是否按优先级进行排序
+  shouldSort: true,
+  // 匹配长度超过这个值的才会被认为是匹配的
+  minMatchCharLength: 1,
+  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+  // name：搜索的键
+  // weight：对应的权重
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
+})
+
 // 控制 search 显示/隐藏
 const isShow = ref(false)
 // el-select 实例
@@ -36,18 +67,41 @@ const onShowClick = () => {
 }
 // search 搜索值
 const search = ref('')
+
+// 搜索结果 options
+const searchOptions = ref([])
 // 搜索方法
-const querySearch = () => {
-  console.log('querySearch')
+const querySearch = (query) => {
+  if (query !== '') {
+    console.log(fuse.search(query))
+    searchOptions.value = fuse.search(query)
+  } else {
+    searchOptions.value = []
+  }
 }
 // 选中回调
-const onSelectChange = () => {
-  console.log('onSelectChange')
+const onSelectChange = (path) => {
+  router.push(path)
 }
+
+// close 函数 :关闭 搜索, 输入框失去焦点, searchOptions 设为[]
+const onClose = () => {
+  headerSearchSelectRef.value.blur()
+  isShow.value = false
+  searchOptions.value = []
+}
+// watch 监听 search 打开 , 处理 close 事件
+watch(isShow, () => {
+  if (isShow.value) {
+    document.addEventListener('click', onClose)
+  } else {
+    document.removeEventListener('click', onClose)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-  .header-search {
+.header-search {
   font-size: 0 !important;
   .search-icon {
     cursor: pointer;
