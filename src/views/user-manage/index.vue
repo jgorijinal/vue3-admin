@@ -1,4 +1,14 @@
 <template>
+  <div class="excel">
+    <el-card>
+      <el-row justify="end">
+        <el-col :span="6">
+          <el-button type="primary" size="small" @click="onImportExcelClick">{{ $t('msg.excel.importExcel') }}</el-button>
+          <el-button type="success" size="small">{{ $t('msg.excel.exportExcel') }}</el-button>
+        </el-col>
+      </el-row>
+    </el-card>
+  </div>
   <div class="user-manage">
     <el-table :data="userManageList" style="width: 100%" border>
       <el-table-column type="index" prop="id" label="#"></el-table-column>
@@ -69,6 +79,7 @@
 import { ref } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
+import router from '@/router'
 const page = ref(1) // 页码
 const size = ref(2) // 每页条数
 const total = ref(0) // 总数
@@ -97,6 +108,14 @@ const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getUserManageListData()
 }
+// excel 页面跳转
+const onImportExcelClick = () => {
+  router.push('/user/import')
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.user-manage {
+  margin-top: 20px;
+}
+</style>
