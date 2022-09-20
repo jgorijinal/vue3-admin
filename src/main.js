@@ -11,9 +11,10 @@ import i18n from './i18n'
 import '@/styles/index.scss'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
+import installFilters from '@/filters'
 const app = createApp(App)
 app.use(i18n)
+installFilters(app)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

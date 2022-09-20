@@ -39,7 +39,7 @@
         width="140"
       >
         <template #default="scope">
-          {{ scope.row.openTime }}
+          {{ $filters.dateFilter(scope.row.openTime) }}
         </template>
       </el-table-column>
       <el-table-column :label="$t('msg.excel.action')" align="center">
