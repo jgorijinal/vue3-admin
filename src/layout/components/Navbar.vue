@@ -5,6 +5,8 @@
     <!--面包屑-->
     <breadcrumb class="breadcrumb"></breadcrumb>
     <div class="right-menu">
+      <!--搜索-->
+      <header-search class="header-search"/>
       <!--全屏切换-->
       <screenfull class="screenfull"/>
       <!--语言切换-->
@@ -37,6 +39,8 @@ import HamBurger from '@/layout/components/Hamburger/index.vue'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
+import HeaderSearch from '@/components/HeaderSearch/index.vue'
+
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logoutAction')
@@ -72,6 +76,13 @@ const logout = () => {
   }
 }
 .lang-select, .screenfull {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.header-search {
   height: 50px;
   display: flex;
   justify-content: center;
