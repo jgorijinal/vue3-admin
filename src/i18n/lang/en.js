@@ -90,10 +90,10 @@ export default {
     feature: 'Feature',
     chapter: 'Chapter',
     author: 'Author',
-    name: 'Sunday',
-    job: 'A front-end development program',
+    name: 'Eren',
+    job: 'A front-end lover',
     Introduction:
-      'A senior technical expert, once worked in a domestic first-line Internet company, and has coordinated multiple large-scale projects with more than tens of millions of users. Committed to researching big front-end technology, he has been invited to participate in domestic front-end technology sharing sessions many times, such as: Google China Technology Sharing Session in 2018.'
+      'Will become awesome programmer'
   },
   userInfo: {
     print: 'Print',

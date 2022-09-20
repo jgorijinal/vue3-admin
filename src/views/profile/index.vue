@@ -37,7 +37,6 @@ const getFeatures = async () => {
   res.splice(9, 1)
   res.splice(9, 1)
   featureData.value = res
-  console.log(res)
 }
 getFeatures()
 
