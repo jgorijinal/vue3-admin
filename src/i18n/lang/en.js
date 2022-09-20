@@ -83,7 +83,7 @@ export default {
   },
   profile: {
     muted:
-      '"Vue3 rewrite vue-element-admin, realize the back-end front-end integrated solution" project demonstration',
+      'Vue3 + Element Plus  back-end front-end',
     introduce: 'Introduce',
     projectIntroduction: 'Project Introduction',
     projectFunction: 'Project Function',
