@@ -8,7 +8,7 @@
         <el-card>
           <el-tabs v-model="activeName" class="demo-tabs">
             <el-tab-pane :label="$t('msg.profile.feature')" name="feature"
-              ><Feature
+              ><Feature :features="featureData"
             /></el-tab-pane>
             <el-tab-pane :label="$t('msg.profile.author')" name="author"
               ><author
@@ -37,6 +37,7 @@ const getFeatures = async () => {
   res.splice(9, 1)
   res.splice(9, 1)
   featureData.value = res
+  console.log(res)
 }
 getFeatures()
 
