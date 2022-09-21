@@ -3,11 +3,11 @@
     <export-to-excel v-model="export2ExcelVisible" />
     <el-card>
       <el-row justify="end">
-        <el-col :span="6">
-          <el-button type="primary" size="small" @click="onImportExcelClick">{{
+        <el-col>
+          <el-button type="primary" @click="onImportExcelClick">{{
             $t('msg.excel.importExcel')
           }}</el-button>
-          <el-button type="success" size="small" @click="onToExcelClick">{{
+          <el-button type="success" @click="onToExcelClick">{{
             $t('msg.excel.exportExcel')
           }}</el-button>
         </el-col>
@@ -59,7 +59,12 @@
       </el-table-column>
       <el-table-column :label="$t('msg.excel.action')" align="center">
         <template #default="scope">
-          <el-button size="small" type="primary">查看</el-button>
+          <el-button
+            size="small"
+            type="primary"
+            @click="onShowClick(scope.row._id)"
+            >{{ $t('msg.excel.show') }}</el-button
+          >
           <el-button size="small" type="info">角色</el-button>
           <el-button
             size="small"
@@ -141,6 +146,11 @@ const onRemoveClick = (row) => {
 const export2ExcelVisible = ref(false)
 const onToExcelClick = () => {
   export2ExcelVisible.value = true
+}
+
+// 查看员工详情
+const onShowClick = (id) => {
+  router.push(`/user/info/${id}`)
 }
 </script>
 

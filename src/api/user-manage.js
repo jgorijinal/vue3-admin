@@ -29,3 +29,10 @@ export function getUserManageAllList() {
     url: '/user-manage/all-list'
   })
 }
+
+// 获取员工详情数据
+export function userDetail(id) {
+  return request({
+    url: `/user-manage/detail/${id}`
+  })
+}
