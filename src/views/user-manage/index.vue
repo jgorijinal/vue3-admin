@@ -1,12 +1,13 @@
 <template>
   <div class="excel">
+    <export-to-excel v-model="export2ExcelVisible" />
     <el-card>
       <el-row justify="end">
         <el-col :span="6">
           <el-button type="primary" size="small" @click="onImportExcelClick">{{
             $t('msg.excel.importExcel')
           }}</el-button>
-          <el-button type="success" size="small">{{
+          <el-button type="success" size="small" @click="onToExcelClick">{{
             $t('msg.excel.exportExcel')
           }}</el-button>
         </el-col>
@@ -60,8 +61,11 @@
         <template #default="scope">
           <el-button size="small" type="primary">查看</el-button>
           <el-button size="small" type="info">角色</el-button>
-          <el-button size="small" type="danger" @click="onRemoveClick(scope.row)"
-            >{{$t('msg.excel.remove')}}</el-button
+          <el-button
+            size="small"
+            type="danger"
+            @click="onRemoveClick(scope.row)"
+            >{{ $t('msg.excel.remove') }}</el-button
           >
         </template>
       </el-table-column>
@@ -86,6 +90,7 @@ import { watchSwitchLang } from '@/utils/i18n'
 import router from '@/router'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import ExportToExcel from './components/Export2Excel.vue'
 const page = ref(1) // 页码
 const size = ref(2) // 每页条数
 const total = ref(0) // 总数
@@ -125,13 +130,19 @@ const onRemoveClick = (row) => {
     i18n.t('msg.excel.dialogTitle1') +
       row.username +
       i18n.t('msg.excel.dialogTitle2')
-  )
-    .then(async () => {
-      await deleteUser(row._id)
-      ElMessage.success(i18n.t('msg.excel.removeSuccess'))
-      // 重新渲染数据
-      getUserManageListData()
-    })
+  ).then(async () => {
+    await deleteUser(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    // 重新渲染数据
+    getUserManageListData()
+  })
+}
+// 导出相关
+const export2ExcelVisible = ref(false)
+const onToExcelClick = () => {
+  export2ExcelVisible.value = true
+  console.log(1)
+  console.log(export2ExcelVisible.value)
 }
 </script>
 
