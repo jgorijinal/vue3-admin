@@ -7,3 +7,12 @@ export function getUserManageList(params) {
     params
   })
 }
+
+// 批量上传
+export function userBatchImport(data) {
+  return request({
+    url: '/user-manage/batch/import',
+    method: 'POST',
+    data
+  })
+}

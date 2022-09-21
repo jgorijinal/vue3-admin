@@ -13,7 +13,7 @@ const privateRoutes = [
     },
     children: [
       {
-        path: '/user/manege',
+        path: '/user/manage',
         name: 'userManage',
         component: () => import('@/views/user-manage/index.vue'),
         meta: {

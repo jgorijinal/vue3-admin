@@ -89,7 +89,6 @@ const getUserManageListData = async () => {
     page: page.value,
     size: size.value
   })
-  console.log(res)
   total.value = res.total
   userManageList.value = res.list
 }
