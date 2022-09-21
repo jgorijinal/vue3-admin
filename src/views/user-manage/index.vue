@@ -141,8 +141,6 @@ const onRemoveClick = (row) => {
 const export2ExcelVisible = ref(false)
 const onToExcelClick = () => {
   export2ExcelVisible.value = true
-  console.log(1)
-  console.log(export2ExcelVisible.value)
 }
 </script>
 

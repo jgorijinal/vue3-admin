@@ -22,3 +22,10 @@ export function deleteUser(id) {
     url: `/user-manage/detele/${id}`
   })
 }
+
+// 获取所有用户
+export function getUserManageAllList() {
+  return request({
+    url: '/user-manage/all-list'
+  })
+}
