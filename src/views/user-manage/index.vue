@@ -3,8 +3,12 @@
     <el-card>
       <el-row justify="end">
         <el-col :span="6">
-          <el-button type="primary" size="small" @click="onImportExcelClick">{{ $t('msg.excel.importExcel') }}</el-button>
-          <el-button type="success" size="small">{{ $t('msg.excel.exportExcel') }}</el-button>
+          <el-button type="primary" size="small" @click="onImportExcelClick">{{
+            $t('msg.excel.importExcel')
+          }}</el-button>
+          <el-button type="success" size="small">{{
+            $t('msg.excel.exportExcel')
+          }}</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -56,8 +60,8 @@
         <template #default="scope">
           <el-button size="small" type="primary">查看</el-button>
           <el-button size="small" type="info">角色</el-button>
-          <el-button size="small" type="danger" @click="delete scope.row.id"
-            >删除</el-button
+          <el-button size="small" type="danger" @click="onRemoveClick(scope.row)"
+            >{{$t('msg.excel.remove')}}</el-button
           >
         </template>
       </el-table-column>
@@ -77,9 +81,11 @@
 
 <script setup>
 import { ref } from 'vue'
-import { getUserManageList } from '@/api/user-manage'
+import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import router from '@/router'
+import { ElMessageBox, ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 const page = ref(1) // 页码
 const size = ref(2) // 每页条数
 const total = ref(0) // 总数
@@ -110,6 +116,22 @@ const handleCurrentChange = (currentPage) => {
 // excel 页面跳转
 const onImportExcelClick = () => {
   router.push('/user/import')
+}
+// 删除用户
+const i18n = useI18n()
+const onRemoveClick = (row) => {
+  console.log(row)
+  ElMessageBox.confirm(
+    i18n.t('msg.excel.dialogTitle1') +
+      row.username +
+      i18n.t('msg.excel.dialogTitle2')
+  )
+    .then(async () => {
+      await deleteUser(row._id)
+      ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+      // 重新渲染数据
+      getUserManageListData()
+    })
 }
 </script>
 

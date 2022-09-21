@@ -16,3 +16,9 @@ export function userBatchImport(data) {
     data
   })
 }
+// 删除用户
+export function deleteUser(id) {
+  return request({
+    url: `/user-manage/detele/${id}`
+  })
+}
