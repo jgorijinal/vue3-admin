@@ -25,6 +25,7 @@ import { useI18n } from 'vue-i18n'
 import { watchSwitchLang } from '@/utils/i18n'
 import { getUserManageAllList } from '@/api/user-manage'
 import { USER_RELATIONS } from './Export2ExcelConstants'
+import { dateFilter } from '@/filters'
 defineProps({
   modelValue: {
     type: Boolean,
@@ -80,11 +81,13 @@ const formatJson = (headers, rows) => {
       if (headers[key] === 'role') {
         return JSON.stringify(item[headers[key]].map((obj) => obj.title))
       }
+      if (headers[key] === 'openTime') {
+        return dateFilter(item[headers[key]])
+      }
       return item[headers[key]]
     })
     arr.push(arrItem)
   })
-  console.log(arr)
   return arr
 }
 </script>
