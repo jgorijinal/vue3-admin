@@ -9,6 +9,7 @@ import { zhCn, en } from './plugins'
 import i18n from './i18n'
 // 初始化样式
 import '@/styles/index.scss'
+import installDirective from '@/directives'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import installFilters from '@/filters'
@@ -18,6 +19,7 @@ installFilters(app)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+installDirective(app)
 
 app
   .use(ElementPlus, {
