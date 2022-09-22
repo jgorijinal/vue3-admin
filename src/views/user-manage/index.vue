@@ -4,7 +4,7 @@
     <el-card>
       <el-row justify="end">
         <el-col>
-          <el-button type="primary" @click="onImportExcelClick">{{
+          <el-button v-permission="['importUser']" type="primary" @click="onImportExcelClick">{{
             $t('msg.excel.importExcel')
           }}</el-button>
           <el-button type="success" @click="onToExcelClick">{{
@@ -65,13 +65,18 @@
             @click="onShowClick(scope.row._id)"
             >{{ $t('msg.excel.show') }}</el-button
           >
-          <el-button size="small" type="info" @click="onShowRoleClick(scope.row)"
+          <el-button
+            size="small"
+            type="info"
+            @click="onShowRoleClick(scope.row)"
+            v-permission="['distributeRole']"
             >{{ $t('msg.excel.role') }}</el-button
           >
           <el-button
             size="small"
             type="danger"
             @click="onRemoveClick(scope.row)"
+            v-permission="['removeUser']"
             >{{ $t('msg.excel.remove') }}</el-button
           >
         </template>
@@ -89,7 +94,11 @@
     />
   </div>
   <!--分配角色弹层-->
-  <roles-dialog v-model="roleDialogVisible" :userId="selectUserId" @updateRoles="getUserManageListData"></roles-dialog>
+  <roles-dialog
+    v-model="roleDialogVisible"
+    :userId="selectUserId"
+    @updateRoles="getUserManageListData"
+  ></roles-dialog>
 </template>
 
 <script setup>
@@ -166,7 +175,7 @@ const onShowRoleClick = (row) => {
   selectUserId.value = row._id
 }
 // 保证每次打开重新获取用户角色数据
-watch(roleDialogVisible, val => {
+watch(roleDialogVisible, (val) => {
   if (!val) selectUserId.value = ''
 })
 </script>
