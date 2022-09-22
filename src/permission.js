@@ -9,14 +9,27 @@ const whiteList = ['/login']
 /**
  * 路由前置守卫
  */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (store.getters.token) {
     // 有 token, 说明已登录
     if (to.path === '/login') {
       next('/')
     } else {
-      if (!store.getters.hasUserInfo) { // 如果没有用户资料
-        store.dispatch('user/getUserInfoAction')
+      if (!store.getters.hasUserInfo) {
+        // 如果没有用户资料
+        const { permission } = await store.dispatch('user/getUserInfoAction')
+        console.log(permission)
+        // 处理用户权限，筛选出需要添加的权限
+        const filterRoutes = await store.dispatch(
+          'permission/filterRoutes',
+          permission.menus
+        )
+        // 利用 addRoute 循环添加
+        filterRoutes.forEach((route) => {
+          router.addRoute(route)
+        })
+        // 添加完动态路由之后，需要在进行一次主动跳转
+        return next(to.path)
       }
       next()
     }

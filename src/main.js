@@ -14,7 +14,6 @@ import installDirective from '@/directives'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import installFilters from '@/filters'
 const app = createApp(App)
-app.use(i18n)
 installFilters(app)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
@@ -27,4 +26,5 @@ app
   })
   .use(store)
   .use(router)
+  .use(i18n)
   .mount('#app')

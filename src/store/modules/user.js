@@ -5,6 +5,7 @@ import { TOKEN } from '@/constant'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 import { setTimeStamp } from '@/utils/auth'
+
 export default {
   namespaced: true,
   state() {
@@ -47,7 +48,7 @@ export default {
     async getUserInfoAction(context) {
       const res = await getUserInfo()
       context.commit('setUserInfo', res)
-      return res
+      return res // 这里要返回用户信息, 后面要用到权限数据
     },
     logoutAction(context) {
       context.commit('setToken', '')
