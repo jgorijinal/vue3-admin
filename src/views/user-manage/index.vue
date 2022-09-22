@@ -113,7 +113,6 @@ const getUserManageListData = async () => {
   })
   total.value = res.total
   userManageList.value = res.list
-  console.log(111111111)
 }
 getUserManageListData()
 
@@ -137,7 +136,6 @@ const onImportExcelClick = () => {
 // 删除用户
 const i18n = useI18n()
 const onRemoveClick = (row) => {
-  console.log(row)
   ElMessageBox.confirm(
     i18n.t('msg.excel.dialogTitle1') +
       row.username +

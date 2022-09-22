@@ -78,7 +78,6 @@ const emits = defineEmits(['update:modelValue', 'updateRoles'])
 const onConfirm = async () => {
   // 确定按钮逻辑
   // 处理数据的结构
-  console.log(userRoleTitleList.value)
   const roles = userRoleTitleList.value.map((title) => {
     return allRoleList.value.find((item) => (item.title === title))
   })
