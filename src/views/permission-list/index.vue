@@ -37,7 +37,6 @@ const allPermission = ref([])
 const getPermissionList = async () => {
   const res = await permissionList()
   allPermission.value = res
-  console.log(res)
 }
 getPermissionList()
 

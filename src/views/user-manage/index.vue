@@ -65,7 +65,9 @@
             @click="onShowClick(scope.row._id)"
             >{{ $t('msg.excel.show') }}</el-button
           >
-          <el-button size="small" type="info">角色</el-button>
+          <el-button size="small" type="info" @click="onShowRoleClick(scope.row)"
+            >{{ $t('msg.excel.role') }}</el-button
+          >
           <el-button
             size="small"
             type="danger"
@@ -86,16 +88,20 @@
       @current-change="handleCurrentChange"
     />
   </div>
+  <!--分配角色弹层-->
+  <roles-dialog v-model="roleDialogVisible" :userId="selectUserId" @updateRoles="getUserManageListData"></roles-dialog>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import router from '@/router'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import ExportToExcel from './components/Export2Excel.vue'
+import RolesDialog from './components/roles.vue'
+
 const page = ref(1) // 页码
 const size = ref(2) // 每页条数
 const total = ref(0) // 总数
@@ -107,6 +113,7 @@ const getUserManageListData = async () => {
   })
   total.value = res.total
   userManageList.value = res.list
+  console.log(111111111)
 }
 getUserManageListData()
 
@@ -152,6 +159,18 @@ const onToExcelClick = () => {
 const onShowClick = (id) => {
   router.push(`/user/info/${id}`)
 }
+
+// 分配角色弹出层
+const roleDialogVisible = ref(false)
+const selectUserId = ref('')
+const onShowRoleClick = (row) => {
+  roleDialogVisible.value = true
+  selectUserId.value = row._id
+}
+// 保证每次打开重新获取用户角色数据
+watch(roleDialogVisible, val => {
+  if (!val) selectUserId.value = ''
+})
 </script>
 
 <style lang="scss" scoped>
