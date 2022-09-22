@@ -2,7 +2,7 @@ import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { ElMessage } from 'element-plus'
 import { setTimeStamp } from '@/utils/auth'
 
@@ -51,6 +51,8 @@ export default {
       return res // 这里要返回用户信息, 后面要用到权限数据
     },
     logoutAction(context) {
+      // 重置路由
+      resetRouter()
       context.commit('setToken', '')
       context.commit('setUserInfo', {})
       storage.clear()

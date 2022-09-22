@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout'
+import store from '@/store'
 
 // 私有路由表
 // const privateRoutes = [
@@ -149,6 +150,21 @@ export const publicRoutes = [
     component: () => import('@/views/error-page/401.vue')
   }
 ]
+/**
+ * 初始化路由表
+ */
+export function resetRouter() {
+  if (
+    store.getters.userInfo &&
+    store.getters.userInfo.permission &&
+    store.getters.userInfo.permission.menus
+  ) {
+    const menus = store.getters.userInfo.permission.menus
+    menus.forEach((menu) => {
+      router.removeRoute(menu) // 因为 menus 它对应的都是路由的name
+    })
+  }
+}
 const router = createRouter({
   history: createWebHashHistory(),
   routes: publicRoutes
