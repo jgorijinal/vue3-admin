@@ -1,5 +1,17 @@
 <template>
   <div class="article-ranking-container">
+    <el-card class="header">
+      <div class="dynamic-box">
+        <span class="title">{{ $t('msg.article.dynamicTitle') }}</span>
+        <el-checkbox-group v-model="selectDynamicLabel">
+          <el-checkbox
+            v-for="(item, index) in dynamicData"
+            :label="item.label"
+            :key="index"
+          ></el-checkbox>
+        </el-checkbox-group>
+      </div>
+    </el-card>
     <el-card>
       <el-table
         :data="tableData"
@@ -8,29 +20,15 @@
         v-loading="loading"
       >
         <el-table-column
-          type="index"
-          :label="$t('msg.article.ranking')"
-          width="120"
-        />
-        <el-table-column
-          prop="title"
-          :label="$t('msg.article.title')"
-          width="180"
-        />
-        <el-table-column
-          prop="author"
-          :label="$t('msg.article.author')"
-          width="180"
-        />
-        <el-table-column
-          prop="publicDate"
-          :label="$t('msg.article.publicDate')"
+          v-for="(item, index) in tableColumns"
+          :prop="item.prop"
+          :label="item.label"
+          :key="index"
         >
-          <template #default="scope">
-            {{ $filters.relativeTime(scope.row.publicDate) }}
-          </template>
+        <template v-if="item.prop === 'publicDate'" #default="scope">
+          {{$filters.relativeTime(scope.row.publicDate)}}
+        </template>
         </el-table-column>
-        <el-table-column prop="desc" :label="$t('msg.article.desc')" />
         <el-table-column :label="$t('msg.article.action')" align="center">
           <template #default="scope">
             <el-button
@@ -66,6 +64,7 @@
 import { ref } from 'vue'
 import { getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
+import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
 // 数据相关
 const tableData = ref([]) // 文章列表
 const page = ref(1) // 当前页码
@@ -83,6 +82,7 @@ const getListData = async () => {
   tableData.value = res.list
   total.value = res.total
   loading.value = false
+  console.log(res)
 }
 
 getListData()
