@@ -21,48 +21,49 @@
 <script setup>
 import { ref } from 'vue'
 import { articleDetail } from '@/api/article'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const articleId = route.params.id // 文章的 id
 
 const detail = ref({}) // 详情
 const getArticleDetail = async () => {
   detail.value = await articleDetail(articleId)
-  console.log(detail.value)
 }
 getArticleDetail()
+
+const router = useRouter()
 const onEditClick = () => {
-  console.log('编辑')
+  router.push(`/article/editor/${articleId}`)
 }
 </script>
 
 <style lang="scss" scoped>
-  .article-detail-container {
-    .title {
-      font-size: 22px;
-      text-align: center;
-      padding: 12px 0;
-    }
-    .header {
-      padding: 26px 0;
-      .author {
-        font-size: 14px;
-        color: #555666;
-        margin-right: 20px;
-      }
-      .time {
-        font-size: 14px;
-        color: #999aaa;
-        margin-right: 20px;
-      }
-      .edit {
-        float: right;
-      }
-    }
-    .content {
+.article-detail-container {
+  .title {
+    font-size: 22px;
+    text-align: center;
+    padding: 12px 0;
+  }
+  .header {
+    padding: 26px 0;
+    .author {
       font-size: 14px;
-      padding: 20px 0;
-      border-top: 1px solid #d4d4d4;
+      color: #555666;
+      margin-right: 20px;
+    }
+    .time {
+      font-size: 14px;
+      color: #999aaa;
+      margin-right: 20px;
+    }
+    .edit {
+      float: right;
     }
   }
-  </style>
+  .content {
+    font-size: 14px;
+    padding: 20px 0;
+    border-top: 1px solid #d4d4d4;
+  }
+}
+</style>
