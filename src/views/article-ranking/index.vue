@@ -18,6 +18,7 @@
         border
         style="width: 100%"
         v-loading="loading"
+        ref="tableRef"
       >
         <el-table-column
           v-for="(item, index) in tableColumns"
@@ -25,9 +26,9 @@
           :label="item.label"
           :key="index"
         >
-        <template v-if="item.prop === 'publicDate'" #default="scope">
-          {{$filters.relativeTime(scope.row.publicDate)}}
-        </template>
+          <template v-if="item.prop === 'publicDate'" #default="scope">
+            {{ $filters.relativeTime(scope.row.publicDate) }}
+          </template>
         </el-table-column>
         <el-table-column :label="$t('msg.article.action')" align="center">
           <template #default="scope">
@@ -61,10 +62,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
+import { tableRef, initSortable } from './sortable'
 // 数据相关
 const tableData = ref([]) // 文章列表
 const page = ref(1) // 当前页码
@@ -107,6 +109,12 @@ const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getListData()
 }
+
+// // 表格拖拽相关
+onMounted(() => {
+  initSortable(tableData, getListData)
+  console.log(tableRef.value.$el)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -131,6 +139,11 @@ const handleCurrentChange = (currentPage) => {
   .pagination {
     margin-top: 20px;
     text-align: center;
+  }
+  ::v-deep .sortable-ghost {
+    opacity: 0.6;
+    color: #fff !important;
+    background: #304156 !important;
   }
 }
 </style>
