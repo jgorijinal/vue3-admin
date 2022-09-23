@@ -87,7 +87,6 @@ const getListData = async () => {
   tableData.value = res.list
   total.value = res.total
   loading.value = false
-  console.log(res)
 }
 
 getListData()
@@ -129,7 +128,6 @@ const handleCurrentChange = (currentPage) => {
 // 表格拖拽相关
 onMounted(() => {
   initSortable(tableData, getListData)
-  console.log(tableRef.value.$el)
 })
 </script>
 

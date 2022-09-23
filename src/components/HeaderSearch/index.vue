@@ -36,7 +36,6 @@ const searchPool = computed(() => {
   const fRoutes = filterRouters(router.getRoutes())
   return generateRoutes(fRoutes)
 })
-console.log(searchPool.value)
 const fuse = new Fuse(searchPool.value, {
   // 是否按优先级进行排序
   shouldSort: true,
@@ -73,7 +72,6 @@ const searchOptions = ref([])
 // 搜索方法
 const querySearch = (query) => {
   if (query !== '') {
-    console.log(fuse.search(query))
     searchOptions.value = fuse.search(query)
   } else {
     searchOptions.value = []
