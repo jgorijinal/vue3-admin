@@ -924,7 +924,15 @@
     "@babel/types" "^7.4.4"
     "esutils" "^2.0.2"
 
-"@babel/runtime@^7.12.13", "@babel/runtime@^7.8.4":
+"@babel/runtime-corejs3@^7.11.2":
+  "integrity" "sha512-j2vJGnkopRzH+ykJ8h68wrHnEUmtK//E723jjixiAl/PPf6FhqY/vYRcMVlNydRKQjQsTsYEjpx+DZMIvnGk/g=="
+  "resolved" "https://registry.npmmirror.com/@babel/runtime-corejs3/-/runtime-corejs3-7.19.1.tgz"
+  "version" "7.19.1"
+  dependencies:
+    "core-js-pure" "^3.25.1"
+    "regenerator-runtime" "^0.13.4"
+
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.12.13", "@babel/runtime@^7.8.4":
   "integrity" "sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA=="
   "resolved" "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.19.0.tgz"
   "version" "7.19.0"
@@ -2988,6 +2996,11 @@
   dependencies:
     "browserslist" "^4.21.3"
 
+"core-js-pure@^3.25.1":
+  "integrity" "sha512-ItD7YpW1cUB4jaqFLZXe1AXkyqIxz6GqPnsDV4uF4hVcWh/WAGIqSqw5p0/WdsILM0Xht9s3Koyw05R3K6RtiA=="
+  "resolved" "https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.25.2.tgz"
+  "version" "3.25.2"
+
 "core-js@^3.8.3":
   "integrity" "sha512-sr0FY4lnO1hkQ4gLDr24K0DGnweGO1QwSj5BpfQjpSJPdqWalja4cTps29Y/PJVG/P7FYlPDkH3hO+Tr0CvDgQ=="
   "resolved" "https://registry.npmmirror.com/core-js/-/core-js-3.25.1.tgz"
@@ -4535,6 +4548,13 @@
   "integrity" "sha512-gceRaITVZ+cJH9sNHqx5tFwbzlLCVxtVZcusME8JYQ8Edy5mpGDOqD8QBCdMhpyo9a+JXddnujQ4rpY2Ff9SJA=="
   "resolved" "https://registry.npmmirror.com/husky/-/husky-7.0.1.tgz"
   "version" "7.0.1"
+
+"i18next@^20.4.0":
+  "integrity" "sha512-89iWWJudmaHJwzIdJ/1eu98GtsJnwBhOUWwlAre70itPMuTE/NTPtgVeaS1CGaB8Q3XrYBGpEqlq4jsScDx9kg=="
+  "resolved" "https://registry.npmmirror.com/i18next/-/i18next-20.4.0.tgz"
+  "version" "20.4.0"
+  dependencies:
+    "@babel/runtime" "^7.12.0"
 
 "iconv-lite@^0.4.24", "iconv-lite@0.4.24":
   "integrity" "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="
@@ -7644,6 +7664,15 @@
   "integrity" "sha512-f+fciywl1SJEniZHD6H+kUO8gOnwIr7f4ijKA6+ZvJFjeGi1r4PDLl53Ayud9O/rk64RqgoQine0feoeOU0kXg=="
   "resolved" "https://registry.npmmirror.com/w3c-keyname/-/w3c-keyname-2.2.6.tgz"
   "version" "2.2.6"
+
+"wangeditor@^4.7.6":
+  "integrity" "sha512-8mOrYG8hDW0ZUhJqPpPGeav90RwZRHIPQolHVjdyQ6jitSmlCTzc67vLz8X5bXocriGOAaVIPiphAD+5wDNwBg=="
+  "resolved" "https://registry.npmmirror.com/wangeditor/-/wangeditor-4.7.6.tgz"
+  "version" "4.7.6"
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@babel/runtime-corejs3" "^7.11.2"
+    "tslib" "^2.1.0"
 
 "watchpack@^2.4.0":
   "integrity" "sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg=="
