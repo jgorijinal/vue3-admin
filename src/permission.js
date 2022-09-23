@@ -18,7 +18,6 @@ router.beforeEach(async (to, from, next) => {
       if (!store.getters.hasUserInfo) {
         // 如果没有用户资料
         const { permission } = await store.dispatch('user/getUserInfoAction')
-        console.log(permission)
         // 处理用户权限，筛选出需要添加的权限
         const filterRoutes = await store.dispatch(
           'permission/filterRoutes',

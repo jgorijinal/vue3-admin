@@ -32,7 +32,6 @@ const generateData = (results) => {
         obj[USER_RELATIONS[key]] = formatDate(item[key])
       }
     })
-    console.log(obj)
     arr.push(obj)
   })
   return arr

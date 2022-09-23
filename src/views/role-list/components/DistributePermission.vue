@@ -51,7 +51,6 @@ const allPermission = ref([]) // 所有权限列表
 const getPermissionList = async () => {
   const res = await permissionList()
   allPermission.value = res
-  console.log(res)
 }
 getPermissionList()
 // 接口国际化处理
