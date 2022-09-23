@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import Sortable from 'sortablejs'
-
+import i18n from '@/i18n'
+import { ElMessage } from 'element-plus'
+import { articleSort } from '@/api/article'
 // 排序相关
 export const tableRef = ref(null)
 
@@ -18,6 +20,21 @@ export const initSortable = (tableData, cb) => {
     // 拖拽时类名
     ghostClass: 'sortable-ghost',
     // 拖拽结束的回调方法
-    onEnd(event) {}
+    async onEnd(event) {
+      const { newIndex, oldIndex } = event
+      // 修改数据
+      await articleSort({
+        initRanking: tableData.value[oldIndex].ranking,
+        finalRanking: tableData.value[newIndex].ranking
+      })
+      ElMessage.success({
+        message: i18n.global.t('msg.article.sortSuccess'),
+        type: 'success'
+      })
+      // 直接重新获取数据无法刷新 table！！所以先置空
+      tableData.value = []
+      // 再重新获取数据
+      cb && cb()
+    }
   })
 }
