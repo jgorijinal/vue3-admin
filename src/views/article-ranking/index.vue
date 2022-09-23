@@ -63,10 +63,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getArticleList } from '@/api/article'
+import { getArticleList, deleteArticle } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
 import { tableRef, initSortable } from './sortable'
+import { ElMessageBox, ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 // 数据相关
 const tableData = ref([]) // 文章列表
 const page = ref(1) // 当前页码
@@ -91,13 +94,26 @@ getListData()
 // 接口国际化处理
 watchSwitchLang(getListData)
 
+const router = useRouter()
 // 查看按钮
 const onShowClick = (row) => {
-  // console.log(row._id)
+  router.push(`/article/${row._id}`)
 }
 // 删除按钮
+const i18n = useI18n()
 const onRemoveClick = (row) => {
-  // console.log(row._id)
+  ElMessageBox.confirm(
+    i18n.t('msg.article.dialogTitle1') +
+      row.title +
+      i18n.t('msg.article.dialogTitle2')
+  )
+    .then(async() => {
+      await deleteArticle(row._id)
+      ElMessage.success(i18n.t('msg.article.removeSuccess'))
+      // 重新获取数据
+      getListData()
+    })
+    .catch(() => {})
 }
 // 每页条数改变
 const handleSizeChange = (pageSize) => {
@@ -110,7 +126,7 @@ const handleCurrentChange = (currentPage) => {
   getListData()
 }
 
-// // 表格拖拽相关
+// 表格拖拽相关
 onMounted(() => {
   initSortable(tableData, getListData)
   console.log(tableRef.value.$el)

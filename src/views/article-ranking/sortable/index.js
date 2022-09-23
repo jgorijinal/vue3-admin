@@ -22,6 +22,7 @@ export const initSortable = (tableData, cb) => {
     // 拖拽结束的回调方法
     async onEnd(event) {
       const { newIndex, oldIndex } = event
+      // 这里的 index 和实际拍迷茫不一样, 需要重新获取 index 真正对应的排名, 然后调接口
       // 修改数据
       await articleSort({
         initRanking: tableData.value[oldIndex].ranking,

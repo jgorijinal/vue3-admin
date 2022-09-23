@@ -18,3 +18,19 @@ export const articleSort = (data) => {
     data
   })
 }
+
+// 删除文章
+export function deleteArticle(id) {
+  return request({
+    url: `/article/delete/${id}`
+  })
+}
+
+/**
+ * 获取文章详情
+ */
+export const articleDetail = (articleId) => {
+  return request({
+    url: `/article/${articleId}`
+  })
+}
