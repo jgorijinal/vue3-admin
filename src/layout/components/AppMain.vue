@@ -8,7 +8,7 @@
 import { useRoute } from 'vue-router'
 import { watch } from 'vue'
 import { useStore } from 'vuex'
-import { generateTitle } from '@/utils/i18n'
+import { generateTitle, watchSwitchLang } from '@/utils/i18n'
 import { isTags } from '@/utils/tags'
 import tagsView from '@/components/TagsView'
 // 目标: 监听路由的变化 , 把路由对象添加到 vuex 的 tagsView 数据源中
@@ -39,6 +39,16 @@ watch(route, (to, from) => {
   })
 }, {
   immediate: true
+})
+
+watchSwitchLang(() => {
+  const tags = store.getters.tagsViewList.map(item => {
+    return {
+      ...item,
+      title: getTitle(item)
+    }
+  })
+  store.commit('app/changeTagsViewLIst', tags)
 })
 </script>
 <style lang="scss" scoped>

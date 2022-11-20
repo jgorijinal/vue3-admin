@@ -28,6 +28,11 @@ export default {
         state.tagsViewList.push(tag)
         storage.setItem(TAGS_VIEW, state.tagsViewList)
       }
+    },
+    // 国际化处理, 需要接受里面的title已经转变的tagsViewList
+    changeTagsViewLIst(state, tags) {
+      state.tagsViewList = tags
+      storage.setItem(TAGS_VIEW, state.tagsViewList)
     }
   }
 }
