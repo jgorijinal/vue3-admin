@@ -18,7 +18,7 @@
 import { useRoute } from 'vue-router'
 import ContextMenu from '@/components/TagsView/ContextMenu.vue'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const route = useRoute()
 // 判断是否当前激活
 const isActive = (path) => {
@@ -45,6 +45,19 @@ const clickContextMenu = (event, index) => {
   visible.value = true
   selectedIndex.value = index
 }
+
+// 监听页面 关闭contextMenu组件
+const closeMenu = () => {
+  visible.value = false
+}
+
+watch(visible, (value) => {
+  if (value) {
+    document.documentElement.addEventListener('click', closeMenu)
+  } else {
+    document.documentElement.removeEventListener('click', closeMenu)
+  }
+})
 </script>
 <style lang="scss" scoped>
 .tags-view-container {
