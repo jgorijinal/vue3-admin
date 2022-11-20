@@ -8,7 +8,8 @@ const getters = {
   },
   cssVar: (state) => variables,
   sidebarOpened: (state) => state.app.sidebarOpened,
-  language: (state) => state.app.lang
+  language: (state) => state.app.lang,
+  tagsViewList: state => state.app.tagsViewList
 }
 
 export default getters
