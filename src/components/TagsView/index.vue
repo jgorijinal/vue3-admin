@@ -1,9 +1,9 @@
 <template>
   <div class="tags-view-container">
-    <template v-for="item in $store.getters.tagsViewList" :key="item.fullPath">
+    <template v-for="item,index in $store.getters.tagsViewList" :key="item.fullPath">
       <router-link :to="{ path:item.fullPath }" class="tags-view-item" :class="isActive(item.path) ? 'active' : ''">
         {{item.title}}
-        <el-icon v-if="!isActive(item.path)" @click.stop.prevent="closeClick(item)"><Close /></el-icon>
+        <el-icon v-if="!isActive(item.path)" @click.stop.prevent="closeClick(item,index)"><Close /></el-icon>
       </router-link>
     </template>
   </div>

@@ -40,7 +40,7 @@ watch(route, (to, from) => {
 }, {
   immediate: true
 })
-
+// 监听语言的变化, 重新生成新的 tagsViewList
 watchSwitchLang(() => {
   const tags = store.getters.tagsViewList.map(item => {
     return {
