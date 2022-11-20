@@ -5,6 +5,8 @@
     <!--面包屑-->
     <breadcrumb class="breadcrumb"></breadcrumb>
     <div class="right-menu">
+      <!--guide 导航-->
+      <guide class="guide"></guide>
       <!--搜索-->
       <header-search class="header-search"/>
       <!--全屏切换-->
@@ -40,6 +42,7 @@ import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Guide from '@/components/Guide/index.vue'
 
 const store = useStore()
 const logout = () => {
@@ -82,7 +85,7 @@ const logout = () => {
   align-items: center;
   margin-right: 10px;
 }
-.header-search {
+.header-search, .guide {
   height: 50px;
   display: flex;
   justify-content: center;
