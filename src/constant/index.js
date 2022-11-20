@@ -6,3 +6,5 @@ export const TIME_STAMP = 'timeStamp'
 export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 1000
 
 export const LANG = 'lang' // 语言
+
+export const TAGS_VIEW = 'tagsView' // tags 多页标签
