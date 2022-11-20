@@ -1,23 +1,45 @@
 <template>
   <div class="tags-view-container">
     <template v-for="item,index in $store.getters.tagsViewList" :key="item.fullPath">
-      <router-link :to="{ path:item.fullPath }" class="tags-view-item" :class="isActive(item.path) ? 'active' : ''">
+      <router-link
+        :to="{ path:item.fullPath }"
+        class="tags-view-item"
+        :class="isActive(item.path) ? 'active' : ''"
+        @contextmenu.prevent="clickContextMenu($event, index)"
+        >
         {{item.title}}
         <el-icon v-if="!isActive(item.path)" @click.stop.prevent="closeClick(item,index)"><Close /></el-icon>
       </router-link>
     </template>
+    <context-menu v-if="visible" :index="selectedTag" :style="contextMenuStyle"></context-menu>
   </div>
 </template>
 <script setup>
 import { useRoute } from 'vue-router'
+import ContextMenu from '@/components/TagsView/ContextMenu.vue'
+import { ref } from 'vue'
 const route = useRoute()
+// 判断是否当前激活
 const isActive = (path) => {
   return route.path === path
 }
-
+// 关闭 标签页
 const closeClick = (item) => {
   console.log('close')
   console.log(item)
+}
+
+const visible = ref(false)
+const contextMenuStyle = ref({
+  left: 0,
+  top: 0
+})
+const selectedTag = ref(0)
+const clickContextMenu = (event, index) => {
+  contextMenuStyle.value.left = event.x + 'px'
+  contextMenuStyle.value.top = event.y + 'px'
+  visible.value = true
+  selectedTag.value = index
 }
 </script>
 <style lang="scss" scoped>
