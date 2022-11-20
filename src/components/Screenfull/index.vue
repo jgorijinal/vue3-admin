@@ -1,5 +1,5 @@
 <template>
-  <div class="screenfull" @click="toggleClick">
+  <div class="screenfull" @click="toggleClick" id="guide-full">
     <el-tooltip
       :content="isFullscreen ? '关闭全屏模式' : '开启全屏模式'"
       trigger="hover"

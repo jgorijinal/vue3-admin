@@ -1,5 +1,5 @@
 <template>
-  <div class="header-search" :class="{ show: isShow }">
+  <div class="header-search" :class="{ show: isShow }" id="guide-search">
     <el-tooltip content="搜索" trigger="hover">
       <el-icon :size="28" class="search-icon" @click.stop="onShowClick"
         ><Search

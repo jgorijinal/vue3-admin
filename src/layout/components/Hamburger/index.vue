@@ -1,5 +1,5 @@
 <template>
-  <div class="hamburger-container">
+  <div class="hamburger-container" id="guide-hamburger">
     <el-icon :size="28" v-if="$store.getters.sidebarOpened" @click="toggleClick"
       ><Fold
     /></el-icon>

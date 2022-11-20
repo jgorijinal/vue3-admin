@@ -1,5 +1,5 @@
 <template>
-  <div class="langSelect">
+  <div class="langSelect" id="guide-lang">
     <el-tooltip content="切换语言" :effect="effect" trigger="hover">
       <el-dropdown
         :hide-on-click="false"

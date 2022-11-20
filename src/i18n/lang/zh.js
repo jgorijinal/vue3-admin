@@ -71,7 +71,7 @@ export default {
     themeDesc: '更换项目主题',
     langTitle: '国际化',
     langDesc: '语言切换',
-    tagTitle: '标签',
+    tagTitle: '多标签页',
     tagDesc: '已打开页面标签',
     sidebarTitle: '菜单',
     sidebarDesc: '项目功能菜单'

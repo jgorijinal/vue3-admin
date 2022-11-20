@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="breadcrumb" separator="/">
+  <el-breadcrumb class="breadcrumb" separator="/" id="guide-breadcrumb">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="item in breadcrumbData" :key="item.path">{{
       generateTitle(item.meta.title)

@@ -1,5 +1,5 @@
 <template>
-  <div class="tags-view-container">
+  <div class="tags-view-container" id="guide-tags">
     <template v-for="item,index in $store.getters.tagsViewList" :key="item.fullPath">
       <router-link
         :to="{ path:item.fullPath }"
