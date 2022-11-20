@@ -13,18 +13,34 @@
 </template>
 <script setup>
 import { defineProps } from 'vue'
-defineProps({
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+const router = useRouter()
+const props = defineProps({
   index: {
     type: Number,
     required: true
   }
 })
-
-const onRefreshClick = () => {}
-
-const onCloseRightClick = () => {}
-
-const onCloseOtherClick = () => {}
+// 刷新
+const onRefreshClick = () => {
+  router.go(0)
+}
+const store = useStore()
+// 关闭右侧
+const onCloseRightClick = () => {
+  store.commit('app/removeTagsViewList', {
+    type: 'right',
+    index: props.index
+  })
+}
+// 关闭其他
+const onCloseOtherClick = () => {
+  store.commit('app/removeTagsViewList', {
+    type: 'other',
+    index: props.index
+  })
+}
 </script>
 <style lang="scss" scoped>
 .context-menu-container {

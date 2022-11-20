@@ -33,6 +33,29 @@ export default {
     changeTagsViewLIst(state, tags) {
       state.tagsViewList = tags
       storage.setItem(TAGS_VIEW, state.tagsViewList)
+    },
+    // tagsViewList 的删除相关操作
+    // 注意 :  payload 接受一个对象
+    // {
+    //   type: 'index' || 'right' || 'other',
+    //   index: 索引
+    // }
+    removeTagsViewList(state, { type, index }) {
+      if (type === 'index') {
+        state.tagsViewList.splice(index, 1)
+      } else if (type === 'other') {
+        state.tagsViewList.splice(
+          index + 1,
+          state.tagsViewList.length - index + 1
+        )
+        state.tagsViewList.splice(0, index)
+      } else if (type === 'right') {
+        state.tagsViewList.splice(
+          index + 1,
+          state.tagsViewList.length - index + 1
+        )
+      }
+      storage.setItem(TAGS_VIEW, state.tagsViewList)
     }
   }
 }
