@@ -18,7 +18,7 @@ export default {
       storage.setItem(LANG, lang)
     },
     // 添加 tags 数据源, 第二个参数 tag 是一个路由对象
-    addTagsList(state, tag) {
+    addTagsViewList(state, tag) {
       // 需要判断一下, 如果tag重复就不添加
       const isFind = state.tagsViewList.find((item) => {
         return item.path === tag.path
