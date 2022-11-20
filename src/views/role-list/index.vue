@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+
+  <div>
     <el-card>
       <el-table :data="allRoles" border style="width: 100%">
         <el-table-column
@@ -31,11 +32,11 @@
         </el-table-column>
       </el-table>
     </el-card>
-  </div>
   <distribute-permission
     v-model="distributePermissionVisible"
     :roleId="selectRoleId"
   ></distribute-permission>
+</div>
 </template>
 
 <script setup>
